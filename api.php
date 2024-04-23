@@ -23,21 +23,25 @@ if(isset($_GET['apicall'])){
 	
 	case 'insert':
 	  $source = $_POST['source'];
-      $status = $_POST['status'];
-      $typeoflead = $_POST['typeoflead'];
+    $status = $_POST['status'];
+    $reason = $_POST['reason'];
+    $typeoflead = $_POST['typeoflead'];
+    $vendorid = $_POST['vendorid'];
+    $rating = $_POST['rating'];
+    $companyid = $_POST['companyid']
 
-      //insert new lead in table Leads
-      $query = "INSERT INTO Lead (source, status, type) VALUES (?, ?, ?)";
-      $stmt = $conn->prepare($query);
-      $stmt->bind_param('sss', $source, $status, $typeoflead);
-      $stmt->execute();
+    //insert new lead in table Leads
+    $query = "INSERT INTO Lead (source, status, reason_disqualified, type, current_component_vendor_id, rating, contact_id) VALUES (?, ?, ?, ?, ?, ?, ?,)";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('sss', $source, $status, $reason, $typeoflead, $vendorid, $rating, $companyid;
+    $stmt->execute();
 
-      if ($stmt->affected_rows > 0){
+    if ($stmt->affected_rows > 0){
 	    echo "<p>Lead inserted into database sucessfully.</p>";
-      } else {
+    } else {
 	    echo "<p>An error has occured.<br/>The item was not added.</p>";
-      }
-      $conn->close();
+    }
+    $conn->close();
   }
 }
 ?>
