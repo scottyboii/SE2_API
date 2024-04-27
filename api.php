@@ -24,16 +24,16 @@ if(isset($_GET['apicall'])){
 	case 'insert':
 	  $source = $_POST['source'];
     $status = $_POST['status'];
-    $reason = $_POST['reason_disqualified'];
-    $typeoflead = $_POST['type'];
-    $vendorid = $_POST['current_component_vendor_id'];
+    $reason = $_POST['reason'];
+    $typeoflead = $_POST['typeoflead'];
+    $vendorid = $_POST['vendorid'];
     $rating = $_POST['rating'];
-    $companyid = $_POST['contact_id'];
+    $companyid = $_POST['companyid'];
 
     //insert new lead in table Leads
     $query = "INSERT INTO Lead (source, status, reason_disqualified, type, current_component_vendor_id, rating, contact_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($query);
-    $stmt->bind_param($source, $status, $reason, $typeoflead, $vendorid, $rating, $companyid);
+    $stmt->bind_param("sssssss", $source, $status, $reason, $typeoflead, $vendorid, $rating, $companyid);
     $stmt->execute();
 
     if ($stmt->affected_rows > 0){
